@@ -2313,3 +2313,74 @@ input:checked + .slider:before { transform: translateX(18px); }
     margin-bottom: 24px;
 }
 .login-card .login-form { text-align: left; }
+
+/* ── Form & Buttons ──────────────────────────────────────── */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.field-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease);
+}
+
+.field-input:focus {
+  border-color: var(--color-primary);
+  background: var(--surface);
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 18px;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:hover { opacity: 0.92; }
+.btn:active { transform: scale(0.98); }
+
+.btn--full { width: 100%; }
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+}
+
+.btn--success {
+  background: var(--color-success);
+  color: #ffffff;
+}
+
+.btn--sm {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+}

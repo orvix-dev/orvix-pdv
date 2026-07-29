@@ -61,19 +61,19 @@
   text-align: left;
 }
 
-.field-group {
+.auth-field-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.field-label {
+.auth-field-label {
   font-size: 13px;
   font-weight: 600;
   color: #374151;
 }
 
-.field-input {
+.auth-field-input {
   width: 100%;
   padding: 11px 14px;
   border: 1.5px solid #e5e7eb;
@@ -86,12 +86,12 @@
   transition: border-color 0.15s ease, background 0.15s ease;
 }
 
-.field-input:focus {
+.auth-field-input:focus {
   border-color: #6d28d9;
   background: #ffffff;
 }
 
-.btn {
+.auth-btn {
   cursor: pointer;
   border: none;
   border-radius: 8px;
@@ -105,39 +105,39 @@
   gap: 8px;
 }
 
-.btn:hover { opacity: 0.92; }
-.btn:active { transform: scale(0.98); }
+.auth-btn:hover { opacity: 0.92; }
+.auth-btn:active { transform: scale(0.98); }
 
-.btn--full { width: 100%; }
+.auth-btn--full { width: 100%; }
 
-.btn--primary {
+.auth-btn--primary {
   background: #6d28d9;
   color: #ffffff;
 }
 
-.btn--ghost {
+.auth-btn--ghost {
   background: transparent;
   border: 1px solid #d1d5db;
   color: #374151;
 }
 
-.btn--success {
+.auth-btn--success {
   background: #16a34a;
   color: #ffffff;
 }
 
-.btn--sm {
+.auth-btn--sm {
   padding: 8px 12px;
   font-size: 13px;
 }
 
-.btn-google {
+.auth-btn-google {
   background: #ffffff;
   color: #374151;
   border: 1.5px solid #e5e7eb;
 }
 
-.btn-google:hover {
+.auth-btn-google:hover {
   background: #f9fafb;
 }
 
