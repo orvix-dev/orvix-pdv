@@ -1,87 +1,23 @@
-# PDV Multi-Loja — Correção de Login + Cadastro (Supabase)
+# PDV Multi-Loja
 
-## O que estava causando o bug
+## Como foi desenvolvido
 
-O login aparecia "no canto superior direito sem formatação" porque:
+Este projeto foi desenvolvido como um sistema de Ponto de Venda (PDV) focado em atender múltiplas lojas simultaneamente, proporcionando uma gestão centralizada.
 
-1. O CSS das telas de autenticação (`.login-card`, `.auth-screen`) dependia de
-   variáveis (`var(--bg)`, `var(--surface-2)`, etc.) definidas no `style.css`
-   original, que provavelmente não tinham essas variáveis — por isso a tela
-   ficava sem cor de fundo, sem centralização, "flutuando" no canto.
-2. O botão do Google não tinha o `type="button"` nem preventDefault,
-   então o clique podia disparar submit de formulário sem ação real.
-3. Não existia handler algum para login/cadastro por e-mail e senha.
+A arquitetura do projeto foi construída utilizando as seguintes tecnologias e conceitos:
 
-## O que foi corrigido nesta versão
+- **Frontend:** Desenvolvido com HTML5, CSS3 e JavaScript puro (ES6 Modules - Vanilla JS), sem a utilização de frameworks pesados, garantindo alta performance, flexibilidade e um carregamento rápido.
+- **Backend e Banco de Dados:** A infraestrutura de backend foi construída sobre o **Supabase** (Backend-as-a-Service). O Supabase é responsável por gerenciar a autenticação dos usuários (suportando login por e-mail/senha e Google OAuth), além de fornecer o banco de dados PostgreSQL para armazenar informações de vendas, produtos, despesas e configurações das lojas, tudo com suporte a atualizações em tempo real.
+- **Estrutura Modular:** O código JavaScript foi arquitetado em módulos distintos, dividindo claramente as responsabilidades (ex: chamadas de API, controle de estado, renderização de UI, fluxos de autenticação). Isso facilita a manutenção, isolamento de escopo e futuras expansões do código.
+- **Interface e UX:** Foram aplicadas práticas modernas de CSS para garantir que elementos críticos, como a tela de autenticação, fossem independentes e autossuficientes, evitando conflitos de estilos com o restante da aplicação.
 
-- Criado `auth-styles.css` **autossuficiente** (não depende de nenhuma
-  variável do seu style.css atual) — garante fundo, centralização e
-  cartão estilizado mesmo que o style.css tenha conflitos.
-- `position: fixed; inset: 0; z-index: 1000;` nas telas de auth, para
-  garantir que fiquem sempre cobrindo a tela inteira, independente do
-  layout do restante do app.
-- Botão do Google agora tem `type="button"` e `e.preventDefault()`, evitando
-  comportamento de submit indesejado.
-- Adicionado formulário de **login por e-mail/senha** (`#login-form`).
-- Adicionada aba de **cadastro** completa (`#signup-section`), com
-  confirmação de senha e link para voltar ao login.
-- Adicionado link "Esqueci minha senha" (`resetPasswordForEmail`).
-- Toda a lógica de troca de tela agora passa por uma única função
-  `showScreen(id)`, eliminando bugs de telas sobrepostas.
+## Planos Futuros
 
-## Estrutura de arquivos (atualizada)
+Para as próximas atualizações do sistema, planejamos implementar as seguintes funcionalidades e melhorias:
 
-```
-public/
-├── index.html            <- reescrito, com login + cadastro + onboarding + seletor
-├── style.css              <- seu CSS original do PDV (mantido)
-├── auth-styles.css        <- NOVO: estilos das telas de autenticação (autossuficiente)
-├── js/
-│   ├── main.js
-│   ├── api/
-│   │   ├── supabaseClient.js   <- ATENÇÃO: preencha SUPABASE_URL e SUPABASE_ANON_KEY
-│   │   ├── auth.js             <- agora com signInWithEmail, signUpWithEmail, resetPassword
-│   │   ├── sales.js
-│   │   ├── products.js
-│   │   ├── expenses.js
-│   │   └── openOrders.js
-│   └── modules/
-│       ├── state.js
-│       ├── authFlow.js         <- reescrito: liga eventos de login/cadastro
-│       ├── appBoot.js
-│       ├── cart.js
-│       ├── sales.js
-│       ├── realtime.js
-│       ├── events.js
-│       └── ui/
-│           ├── authScreens.js  <- reescrito: showScreen() + bindLoginScreenEvents()
-│           ├── render.js
-│           ├── notifications.js
-│           └── receipt.js
-```
-
-## Passo a passo para testar localmente
-
-1. Preencha `js/api/supabaseClient.js` com a URL e a anon key do seu projeto Supabase.
-2. No painel Supabase, habilite:
-   - Authentication > Providers > Email (para login por e-mail/senha) — já vem
-     habilitado por padrão.
-   - Authentication > Providers > Google (para login social) — configure o
-     Client ID/Secret do Google Cloud Console.
-3. Sirva a pasta `public/` com um servidor local (necessário por causa dos módulos ES):
-   ```
-   npx serve public
-   ```
-   ou
-   ```
-   python -m http.server --directory public 5500
-   ```
-4. Abra no navegador — a tela de login já deve aparecer centralizada, estilizada,
-   com botão Google funcional e formulário de e-mail/senha abaixo.
-
-## Importante sobre confirmação de e-mail
-
-Por padrão, o Supabase exige confirmação de e-mail antes do primeiro login
-funcionar. Se quiser testar rapidamente sem esse passo, desative em:
-Authentication > Providers > Email > "Confirm email" (desmarcar), apenas
-em ambiente de desenvolvimento.
+- **Gestão de Estoque Avançada:** Inclusão de alertas de estoque baixo, relatórios de movimentação e cálculo de custo médio de produtos.
+- **Relatórios e Analytics Visuais:** Criação de dashboards gerenciais com gráficos para melhor visualização do faturamento, ranking de produtos mais vendidos e comparação de performance entre as diferentes lojas.
+- **Suporte Offline-First (PWA):** Implementação de Service Workers e IndexedDB para permitir o funcionamento ininterrupto do PDV mesmo sem conexão com a internet, realizando a sincronização dos dados automaticamente assim que a conexão for restabelecida.
+- **Módulo Financeiro Expandido:** Aprimoramento da seção de despesas para abranger fluxo de caixa completo, contas a pagar e receber, e conciliação bancária.
+- **Integração com Hardware Específico:** Melhor suporte e integração direta com impressoras térmicas (para emissão de recibos) e leitores de código de barras, visando agilizar o processo de checkout no balcão de vendas.
+- **Controle de Permissões (RBAC):** Adição de níveis de acesso (ex: Administrador, Gerente, Operador de Caixa) para restringir funcionalidades e visualização de dados de acordo com o cargo do funcionário logado.
