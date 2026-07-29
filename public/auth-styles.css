@@ -1,0 +1,251 @@
+/* ============================================================
+   auth-styles.css
+   Estilos AUTOSSUFICIENTES das telas de autenticação (login,
+   cadastro, onboarding, seletor de loja). Não depende de variáveis
+   do style.css — resolve o bug de "aba sem formatação".
+   ============================================================ */
+
+.auth-screen {
+  position: fixed;
+  inset: 0;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+  padding: 20px;
+  z-index: 1000;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.auth-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.auth-card--wide {
+  max-width: 620px;
+}
+
+.auth-card-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.auth-card-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 6px;
+}
+
+.auth-card-subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 24px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.field-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  background: #f9fafb;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.field-input:focus {
+  border-color: #6d28d9;
+  background: #ffffff;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 18px;
+  transition: transform 0.1s ease, opacity 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:hover { opacity: 0.92; }
+.btn:active { transform: scale(0.98); }
+
+.btn--full { width: 100%; }
+
+.btn--primary {
+  background: #6d28d9;
+  color: #ffffff;
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #374151;
+}
+
+.btn--success {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.btn--sm {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.btn-google {
+  background: #ffffff;
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
+}
+
+.btn-google:hover {
+  background: #f9fafb;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.auth-divider span {
+  padding: 0 12px;
+}
+
+.auth-link-small {
+  font-size: 12.5px;
+  color: #6d28d9;
+  text-decoration: none;
+  align-self: flex-end;
+  margin-top: -6px;
+}
+
+.auth-link-small:hover {
+  text-decoration: underline;
+}
+
+.auth-footer-text {
+  margin-top: 22px;
+  font-size: 13.5px;
+  color: #6b7280;
+}
+
+.auth-footer-text a {
+  color: #6d28d9;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer-text a:hover {
+  text-decoration: underline;
+}
+
+.tenant-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.tenant-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 12px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tenant-card:hover {
+  border-color: #6d28d9;
+  background: #f3e8ff;
+}
+
+.tenant-card img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+}
+
+.tenant-card-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.tenant-card-city {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.tenant-card-role {
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #6d28d9;
+}
+
+[data-requires-admin] {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 28px 20px;
+  }
+}
